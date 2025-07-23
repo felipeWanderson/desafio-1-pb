@@ -13,7 +13,7 @@ export const nearestNeighbor = (
   const startPoint = points[startIndex];
 
   let unvisited = points.filter((_, index) => index !== startIndex);
-  const route: DeliveryPoint[] = [startPoint];
+  const routes: DeliveryPoint[] = [startPoint];
   
   let current = startPoint;
   let totalDistance = 0;
@@ -24,17 +24,17 @@ export const nearestNeighbor = (
     
     totalDistance += euclideanDistance(current, nextPoint);
     
-    route.push(nextPoint);
+    routes.push(nextPoint);
     current = nextPoint;
 
     unvisited = unvisited.filter((_, index) => index !== nextIndex);
   }
 
   totalDistance += euclideanDistance(current, startPoint);
-  route.push(startPoint);
+  routes.push(startPoint);
 
   return {
-    order: route.map(p => p.id),
+    order: routes.map(route => route.id),
     totalDistance
   };
 };
